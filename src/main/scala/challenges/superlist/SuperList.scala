@@ -7,3 +7,10 @@ class SuperList(val list: List[Int]) {
     this(args.toList)
   }
 }
+
+object SuperList {
+
+  def apply(list: List[Int]) = new SuperList(list)
+
+  def apply(args: Int*) = new SuperList(args.toList)
+}

@@ -33,12 +33,25 @@ class SuperListSpec extends WordSpec {
       }
     }
 
-    "wrap int parameters" in { //TODO: Better name?
+    "wrap int parameters" in {
       //when
       val result = new SuperList(1, 2, 3)
 
       //then
       result.list shouldBe List(1, 2, 3)
     }
+
+    "instantiate wrapper without 'new' keyword and a List[Int] as parameter" in {
+      val list = List(1, 2, 3)
+      val result = SuperList(list)
+      result.list shouldBe list
+    }
+
+    "instantiate wrapper without 'new' keyword and class parameters" in {
+      val result = SuperList(1, 2, 3)
+      result.list shouldBe List(1, 2, 3)
+    }
+
+
   }
 }
