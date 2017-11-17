@@ -29,19 +29,8 @@ class SuperListSpec extends WordSpec {
 
     "throw an exception if passing a null value" in {
       intercept[IllegalArgumentException] {
-        val result = new SuperList(null)
+        new SuperList(null)
       }
-    }
-
-    "wrap a list of ints" in {
-      //given
-      val list = List(1, 2, 3)
-
-      //when
-      val result = new SuperList(list)
-
-      //then
-      result.list shouldBe list
     }
 
     "wrap int parameters" in { //TODO: Better name?
