@@ -1,7 +1,7 @@
 package challenges.superlist
 
+import org.scalatest.Matchers._
 import org.scalatest._
-import Matchers._
 
 class SuperListSpec extends WordSpec {
   "A SuperList" should {
@@ -28,7 +28,9 @@ class SuperListSpec extends WordSpec {
     }
 
     "throw an exception if passing a null value" in {
-
+      intercept[IllegalArgumentException] {
+        val result = new SuperList(null)
+      }
     }
   }
 }
