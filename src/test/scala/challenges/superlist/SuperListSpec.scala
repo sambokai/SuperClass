@@ -44,5 +44,12 @@ class SuperListSpec extends WordSpec {
       result.list shouldBe list
     }
 
+    "wrap int parameters" in { //TODO: Better name?
+      //when
+      val result = new SuperList(1, 2, 3)
+
+      //then
+      result.list shouldBe List(1, 2, 3)
+    }
   }
 }
