@@ -8,6 +8,8 @@ class SuperList(val list: List[Int]) {
   }
 
   def lastThree(): List[Int] = list.slice(list.length - 3, list.length)
+
+  def power(n: Int): List[Double] = list.map(math.pow(_, n))
 }
 
 object SuperList {

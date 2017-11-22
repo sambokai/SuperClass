@@ -73,5 +73,13 @@ class SuperListSpec extends WordSpec {
       }
 
     }
+
+    "when invoking power(n: Int)" should {
+      "return a list with all elements of the superlist powered to n" in {
+        val list = List(2, 4, 8)
+        val result = SuperList(list)
+        result.power(2) shouldBe List(4, 16, 64)
+      }
+    }
   }
 }
