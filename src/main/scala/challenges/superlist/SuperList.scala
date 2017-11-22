@@ -6,6 +6,8 @@ class SuperList(val list: List[Int]) {
   def this(args: Int*) {
     this(args.toList)
   }
+
+  def lastThree(): List[Int] = list.slice(list.length - 3, list.length)
 }
 
 object SuperList {

@@ -55,6 +55,23 @@ class SuperListSpec extends WordSpec {
       }
     }
 
+    "when invoking lastThree()" should {
 
+      "return the last three elements" in {
+        val result = SuperList(List(1, 2, 3, 4, 5))
+        result.lastThree() shouldBe List(3, 4, 5)
+      }
+
+      "return all elements when the SuperList has less than three elements" in {
+        val result = SuperList(List(1, 2))
+        result.lastThree() shouldBe List(1, 2)
+      }
+
+      "return an empty list when the SuperList has no elements" in {
+        val result = SuperList(List.empty)
+        result.lastThree() shouldBe List.empty
+      }
+
+    }
   }
 }
