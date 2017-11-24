@@ -112,5 +112,26 @@ class SuperListSpec extends WordSpec {
         SuperList(List()).primes() shouldBe List.empty
       }
     }
+
+    "when invoking partition(size: Int)" should {
+      "return superlist, splitted in lists of predefined size" in {
+        val list = List(1, 2, 3, 4)
+        val result = SuperList(list)
+
+        result.partition(2) shouldBe List(List(1, 2), List(3, 4))
+      }
+
+      "return empty list on an empty superlist" in {
+        SuperList(List()).partition(2) shouldBe List.empty
+      }
+
+      "return smaller smaller last partition, if the number of elements in superlist is not divisible by 'size'-parameter" in {
+        val list = List(1, 2, 3)
+        val result = SuperList(list)
+
+        result.partition(2) shouldBe List(List(1, 2), List(3))
+      }
+
+    }
   }
 }

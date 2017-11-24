@@ -13,6 +13,8 @@ class SuperList(val list: List[Int]) {
 
   def primes(): List[Int] = list.filter(n => SuperList.isPrime(n))
 
+  def partition(size: Int): List[List[Int]] = list.grouped(size).toList
+
 }
 
 object SuperList {
