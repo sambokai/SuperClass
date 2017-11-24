@@ -35,22 +35,20 @@ class SuperListSpec extends WordSpec {
       }
 
       "wrap int parameters" in {
-        //when
-        val result = new SuperList(1, 2, 3)
-
         //then
-        result.list shouldBe List(1, 2, 3)
+        new SuperList(1, 2, 3).list shouldBe List(1, 2, 3)
       }
+    }
 
-      "instantiate wrapper without 'new' keyword and a List[Int] as parameter" in {
+    "provide a factory method" should {
+      "work with list of integers" in {
         val list = List(1, 2, 3)
         val result = SuperList(list)
         result.list shouldBe list
       }
 
-      "instantiate wrapper without 'new' keyword and class parameters" in {
+      "work with sequence of integers" in {
         val result = SuperList(1, 2, 3)
-        println(result)
         result.list shouldBe List(1, 2, 3)
       }
     }
@@ -58,58 +56,73 @@ class SuperListSpec extends WordSpec {
     "when invoking lastThree()" should {
 
       "return the last three elements" in {
-        val result = SuperList(List(1, 2, 3, 4, 5))
-        result.lastThree() shouldBe List(3, 4, 5)
+        // given
+        val list = SuperList(List(1, 2, 3, 4, 5))
+
+        //when
+        val result = list.lastThree
+
+        //then
+        result shouldBe List(3, 4, 5)
       }
 
       "return all elements when the SuperList has less than three elements" in {
         val result = SuperList(List(1, 2))
-        result.lastThree() shouldBe List(1, 2)
+        result.lastThree shouldBe List(1, 2)
       }
 
       "return an empty list when the SuperList has no elements" in {
         val result = SuperList(List.empty)
-        result.lastThree() shouldBe List.empty
+        result.lastThree shouldBe List.empty
       }
-
     }
 
     "when invoking power(n: Int)" should {
       "return a list with all elements of the superlist powered to n" in {
-        val list = List(2, 4, 8)
-        val result = SuperList(list)
-        result.power(2) shouldBe List(4, 16, 64)
+        val powers = Seq(2, 58, 4647, 97, 1000000)
+        val superlist = SuperList(2, 4, 8)
+
+        powers.foreach { p =>
+          val result = superlist.power(p)
+          val expected = superlist.list.map(math.pow(_, p))
+
+          result shouldBe expected
+        }
       }
     }
 
-    "when invoking static method isPrime(n: Int)" should {
-      "return true if a pime number is passed" in {
-        SuperList.isPrime(3) shouldBe true
+    "when invoking method isPrime(n: Int)" should {
+      "return true if n is prime" in {
+        val primes = Seq(2, 37, 41, 59, 127)
+
+        primes.foreach { p =>
+          val result = SuperList.isPrime(p)
+
+          result shouldBe (true)
+        }
       }
 
-      "return false if a non-prime number is passed" in {
-        SuperList.isPrime(4) shouldBe false
-      }
+      "return false if n is not prime" in {
+        val primes = Seq(4, 60, 55, 1000, 1255)
 
-      "return false if a negative number is passed" in {
-        SuperList.isPrime(-5) shouldBe false
-      }
+        primes.foreach { p =>
+          val result = SuperList.isPrime(p)
 
-      "return false if zero is passed" in {
-        SuperList.isPrime(0) shouldBe false
+          result shouldBe (false)
+        }
       }
     }
 
     "when invoking primes()" should {
 
       "return a list, with only the elements of a superlist that are prime numbers" in {
-        val result = SuperList(List(1, 2, 3, 4, 5))
+        val result = SuperList(List(1, 2, 3, 4, 5)).primes
 
-        result.primes() shouldBe List(2, 3, 5)
+        result shouldBe List(2, 3, 5)
       }
 
       "return an empty list on an empty superlist" in {
-        SuperList(List()).primes() shouldBe List.empty
+        SuperList(List()).primes shouldBe List.empty
       }
     }
 
@@ -131,7 +144,6 @@ class SuperListSpec extends WordSpec {
 
         result.partition(2) shouldBe List(List(1, 2), List(3))
       }
-
     }
 
     "when invoking superStar()" should {
