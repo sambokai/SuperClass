@@ -133,5 +133,17 @@ class SuperListSpec extends WordSpec {
       }
 
     }
+
+    "when invoking superStar()" should {
+      "return a map, whose keys are the elements of the superlist and values are key-times '*'" in {
+        val result = SuperList(2, 5)
+        result.superStar shouldBe Map(2 -> List('*', '*'), 5 -> List('*', '*', '*', '*', '*'))
+      }
+
+      "only return one (k,v) pair if there is more than one occurence of an element in the superlist" in {
+        val result = SuperList(2, 2)
+        result.superStar shouldBe Map(2 -> List('*', '*'))
+      }
+    }
   }
 }

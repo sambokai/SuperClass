@@ -15,6 +15,11 @@ class SuperList(val list: List[Int]) {
 
   def partition(size: Int): List[List[Int]] = list.grouped(size).toList
 
+  def superStar(): Map[Int, List[Char]] = {
+    val STAR = '*'
+    list.map(a => a -> List.fill(a)(STAR)).toMap
+  }
+
 }
 
 object SuperList {
@@ -31,4 +36,5 @@ object SuperList {
     else
       !(2 until n).exists(x => n % x == 0)
   }
+
 }
