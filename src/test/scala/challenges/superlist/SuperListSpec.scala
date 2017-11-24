@@ -81,5 +81,36 @@ class SuperListSpec extends WordSpec {
         result.power(2) shouldBe List(4, 16, 64)
       }
     }
+
+    "when invoking static method isPrime(n: Int)" should {
+      "return true if a pime number is passed" in {
+        SuperList.isPrime(3) shouldBe true
+      }
+
+      "return false if a non-prime number is passed" in {
+        SuperList.isPrime(4) shouldBe false
+      }
+
+      "return false if a negative number is passed" in {
+        SuperList.isPrime(-5) shouldBe false
+      }
+
+      "return false if zero is passed" in {
+        SuperList.isPrime(0) shouldBe false
+      }
+    }
+
+    "when invoking primes()" should {
+
+      "return a list, with only the elements of a superlist that are prime numbers" in {
+        val result = SuperList(List(1, 2, 3, 4, 5))
+
+        result.primes() shouldBe List(2, 3, 5)
+      }
+
+      "return an empty list on an empty superlist" in {
+        SuperList(List()).primes() shouldBe List.empty
+      }
+    }
   }
 }
